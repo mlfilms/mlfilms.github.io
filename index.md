@@ -12,4 +12,4 @@ article_header:
     src: /assets/images/background.png
 ---
 
-## Welcome
+

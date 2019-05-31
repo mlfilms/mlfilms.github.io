@@ -20,7 +20,7 @@ text_skin: default # "default" (default), "dark", "forest", "ocean", "chocolate"
 highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
 url     : mlfilms.github.io # the base hostname & protocol for your site e.g. https://www.someone.com
 baseurl : # does not include hostname
-title   : Machine Learning 2D Films of Liquid Crystals
+title   : Machine Learning | Topological Defects
 description :  We are a group of graduate and undergradate students at University of Colorado Boulder, investigating the application of machine learning to the physics of 2D liquid crystal films
 # this means to ignore newlines until "Language & timezone"
 
