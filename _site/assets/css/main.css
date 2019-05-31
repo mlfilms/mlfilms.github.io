@@ -2982,7 +2982,7 @@ a > .item__header, a.item__header, .item__header > a {
         flex-direction: column; } }
 
 .header--dark {
-  background: rgba(0, 0, 0, 0.15); }
+  background: rgba(0, 0, 0, 0.56); }
   .header--dark .navigation__item--active::after {
     border: 0 solid rgba(255, 255, 255, 0.95);
     border-bottom-width: 4px; }
