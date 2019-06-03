@@ -1938,6 +1938,14 @@ input:focus {
 .image--xs {
   width: 4rem; }
 
+.center-image {
+  margin: 0 auto;
+  display: block; }
+
+img + em {
+  display: block;
+  text-align: center; }
+
 .card {
   max-width: 18rem;
   border-radius: 0.4rem;

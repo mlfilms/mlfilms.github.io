@@ -1,4 +1,4 @@
-{%- assign _author = site.data.authors[include.article.author] | default: site.author -%}
+{%- assign _author = site.authors| where: 'short_name',  include.article.author |first %}
 
 {%- if include.html != false -%}
 
