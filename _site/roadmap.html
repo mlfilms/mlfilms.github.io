@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="en">
   <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Using Deep Learning Algorithms for Defect Detection - Machine Learning | Topological Defects</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><title>Outline of MLfilms Project - Machine Learning | Topological Defects</title>
 
-<meta name="description" content="AlgorithmsA great deal of research has been performed on applying deep learning to object detection tasks. The resulting methods have proved to be quicker an...">
-<link rel="canonical" href="http://localhost:4000/2019/06/03/mldescription.html"><link rel="alternate" type="application/rss+xml" title="Machine Learning | Topological Defects" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
+<meta name="description" content="We are a group of graduate and undergradate students at University of Colorado Boulder, investigating the application of machine learning to the physics of 2D liquid crystal films">
+<link rel="canonical" href="http://localhost:4000/roadmap.html"><link rel="alternate" type="application/rss+xml" title="Machine Learning | Topological Defects" href="/feed.xml"><!-- start favicons snippet, use https://realfavicongenerator.net/ --><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png"><link rel="manifest" href="/assets/site.webmanifest"><link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#fc4d50"><link rel="shortcut icon" href="/assets/favicon.ico">
 
 <meta name="msapplication-TileColor" content="#ffc40d"><meta name="msapplication-config" content="/assets/browserconfig.xml">
 
@@ -405,7 +405,7 @@
   </g>
 </svg>
 <a title="We are a group of graduate and undergradate students at University of Colorado Boulder, investigating the application of machine learning to the physics of 2D liquid crystal films" href="/">Machine Learning | Topological Defects</a></div><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></div><nav class="navigation">
-        <ul><li class="navigation__item"><a href="/archive.html">Archive</a></li><li class="navigation__item"><a href="/staff.html">About</a></li><li class="navigation__item"><a href="/roadmap.html">Outline</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
+        <ul><li class="navigation__item"><a href="/archive.html">Archive</a></li><li class="navigation__item"><a href="/staff.html">About</a></li><li class="navigation__item navigation__item--active"><a href="/roadmap.html">Outline</a></li><li><button class="button button--secondary button--circle search-button js-search-toggle"><i class="fas fa-search"></i></button></li></ul>
       </nav></div>
   </header>
 </div><div class="page__content"><div class ="main"><div class="grid grid--reverse">
@@ -414,63 +414,77 @@
 
               <div class="col-main cell cell--auto"><!-- start custom main top snippet -->
 
-<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/WebPage"><div class="article__header"><header><h1>Using Deep Learning Algorithms for Defect Detection</h1></header><span class="split-space">&nbsp;</span>
-          <a class="edit-on-github"
-            title="Edit on Github"
-            href="https://github.com/mlfilms/mlfilms.github.io/tree/master/_posts/2019-06-03-mldescription.md">
-            <i class="far fa-edit"></i></a></div><meta itemprop="headline" content="Using Deep Learning Algorithms for Defect Detection"><div class="article__info clearfix"><ul class="right-col menu"><li><i class="fas fa-user"></i> <span>Eric Person</span></li><li><i class="far fa-calendar-alt"></i> <span>Jun 03, 2019</span>
-            </li></ul></div><meta itemprop="author" content="Eric Person"/><meta itemprop="datePublished" content="2019-06-03T00:00:00-06:00"><div class="js-article-content"><h2 id="algorithms">Algorithms</h2>
-<p>A great deal of research has been performed on applying deep learning to object detection tasks. The resulting methods have proved to be quicker and more accurate than traditional computer vision techniques, however adoption of these algorithms for laboratory usage has lagged due to the difficulty in acquiring the large, labeled datasets necessary for training neural networks. We will be attempting to determine the efficacy of generating labeled training data from a simulation, and using it to detect defects in real-world data. Ideally, we would also like to create a simple pipeline allowing the detection of other objects to be quickly automated.</p>
+<!-- end custom main top snippet --><article itemscope itemtype="http://schema.org/Article"><div class="article__header"><header><h1>Outline of MLfilms Project</h1></header></div><meta itemprop="headline" content="Outline of MLfilms Project"><meta itemprop="author" content="Adam Green"/><div class="js-article-content"><div class="layout--article"><!-- start custom article top snippet -->
 
-<p>For reference, the images we are attempting to annotate look like the one below. Defects are the points marked by red dots.</p>
+<!-- end custom article top snippet --><div class="article__content" itemprop="articleBody"><h2 id="thesis">thesis</h2>
+<p><em>To test machine learning techniques to experimental image analysis.</em></p>
 
-<p><img src="/assets/images/153248_defect11SIMMARKED.jpg" alt="Sample Defect Image " title="Sample Defect Image" class="center-image" />
-<em>Sample Defect Image</em></p>
+<p><strong>statement 1|</strong> The machine learning renissonce has given machines the ability to analyze complicated data sets (such as images) and extract useful information (see facial recognition). Success of these methods depends on having large sets of training data.</p>
 
-<p>The three most popular algorithms for object detection are RCNN (and its successors), Single Shot Detectors (SSD), and YOLO. Although all three approaches make use of deep neural networks, their methods of finding bounding boxes differ greatly. It is important to understand these differences, so I will provide a brief summary of each.
-R-CNN – Region Convolutional Neural network. Most modern version is known as Faster R-CNN. This algorithm uses a search function to find potential candidate objects to run object recognition on. Slower, but accurate. Unfortunately, since this algorithm depends on only running the neural network on likely object candidates detected in a untrainable search algorithm, it will most likely perform poorly at detecting objects that don’t fit traditional ideas of what constitutes an object.</p>
+<p><strong>statement 2|</strong> Experimental results from table-top physical experiments are rarely large or robust enough to form self-consistant training sets, so experimental analysis in physics remains a ‘bespoke’ process, requiring a craftsperson (graduate student) to analyze each set of data by hand.</p>
 
-<p>SSD- Single Shot (multibox) Detector. This algorithm works by creating multiple default bounding boxes over the entirety of an image. A neural network scores the bounding boxes and provides a prediction for how to adjust the regions to maximize a high class. Faster than R-CNN, but slightly less accurate.</p>
+<p><strong>statement 3|</strong> Physical systems can often be simulated to high-accuracy using modern computing resources.</p>
 
-<p>YOLO – You Only Look Once. The input image is initially divided into a grid. Each cell in the grid is used to predict five bounding boxes. A classifier is run for each predicted bounding box, and outcomes with high certainty scores are returned as objects. This is the fastest of the three algorithms, although slightly less accurate in general. However, since the features we are looking at aren’t typical objects this method is likely to work better than R-CNN.</p>
+<p><strong>proposal|</strong> For certain physical systems, training sets can be generated by physical simulations of the system of interest. These training sets can be fed into modern machine learning algorithms to produce robust analysis models, resulting in greater bandwidth for experimental analysis.</p>
 
-<p>Since we will be attempting to detect defects, which do not look like the ordinary definition of an object (see above image), R-CNN would make a poor choice. Both SSD and YOLO are likely to produce good results. YOLO has the advantage of the having a highly accessibly implementation known as darkflow, which uses the python tensorflow library on the backend. This a major advantage when considering accessibility for scientists or industrial users who may need to make their own modifications, as python is a much more readable and easier to understand language than other languages commonly used for deep learning algorithms.</p>
+<h2 id="science-plan">Science Plan</h2>
 
-<h2 id="darkflow">Darkflow</h2>
-<p>The original darkflow repository can be found here https://github.com/thtrieu/darkflow
-The repository for our modified code can be found here https://github.com/mlfilms/defectTracker
-Our code includes scripts for simplifying the process of training and running the algorithm.
-To make a model, you will also need the default weights file to train from, which is located at https://drive.google.com/drive/u/2/folders/1c_xrWVKNBuqZUwXGvv_MBamOHNa1wBKy along with other trained models. Download the yolo.weights file and place it in a bin folder.</p>
+<p><strong>experimental system of interest</strong></p>
 
-<p>The readme included in the repo explains how to use the system in detail, and includes instructions on installing dependencies.</p>
+<p>Two-dimensional topological films…</p>
 
-<p>Inside the darkflow folder are three scripts that make running training, running, and validating the model easier. trainFlow.py uses annotations and images to train a model. Adjust the batch size or gpu usage number if you run into memory errors. runFlowPB.py loads a model from the .pb and .meta files generated when a model is finished training. The images in the specified directory will be analyzed and marked images will be output, along with json files containing the detections. Finally, validation .py makes use of code from https://github.com/Cartucho/mAP to evaluate how well a trained model performs</p>
+<p><strong>stage 0: up and running</strong></p>
+<ol>
+  <li>collect data from experimenal system</li>
+  <li>generate simulated training sets</li>
+  <li>choose machine learning paradigm</li>
+  <li>establish machine learning pipeline (simulation (generate images)-&gt; machine learning (train model)-&gt; verification (verify on experimental data)</li>
+  <li>documentation/reproducibility (docker, website)</li>
+</ol>
 
-<p>Also included are scripts for generating simple training data datasets consisting of images with circles. As a first order test, this simulated data was used to evaluate the effectiveness of YOLO for detecting circles when compared with a common, non-ML algorithm, the circular hough transform. Although both methods were able to properly label almost all circles in clear images, YOLO showed superiority at detecting circles in noisy data, yielding a mAP score of around 80% when the hough transform failed to detect any circles.</p>
+<p><strong>stage 1: refinement</strong></p>
+<ol>
+  <li>add noise into simulation image set</li>
+  <li>experiment with parameters to achieve best accuracy of model</li>
+  <li>add filtering step onto pipeline to clean up spurious detections</li>
+</ol>
 
-<p><img src="/assets/images/circle_14.jpg" alt="Noisy Circles " title="Noisy Circles" class="center-image" width="400px" />
-<em>The YOLO detections in noisy data. The circular hough transform failed to detect any circles in this data.</em></p>
+<p><strong>stage 2: application</strong></p>
+<ol>
+  <li>apply pipeline to system of interest to generate novel results</li>
+</ol>
 
-<p><img src="/assets/images/circle_4.jpg" alt="Clear Circles " title="Clear Circles" class="center-image" width="400px" />
-<em>Clear images of circles. Both the circular hough transform and YOLO were able to detect almost all images in this dataset.</em></p>
+</div><div class="d-print-none"><footer class="article__footer"><!-- start custom article footer snippet -->
 
-<p>This demonstrates the viability of YOLO at providing superior performance detecting objects in imperfect or noisy data, as is often necessary in real scenarios.</p>
+<!-- end custom article footer snippet --></footer></div>
 
-<p>Training the model took around 45 minutes on a GTX 1080 GPU, and the final model was able to label 200 images in about 25 seconds, demonstrating the viability of training and using darkflow without the need for specialized hardward.</p>
+</div>
 
-<p>The system can be setup on a windows computer running anaconda in three commands, and can be retrained, ran, and validated with easily with three scripts written to simplify the process.</p>
+<script>(function() {
+  var SOURCES = window.TEXT_VARIABLES.sources;
+  window.Lazyload.js(SOURCES.jquery, function() {
+    $(function() {
+      var $this ,$scroll;
+      var $articleContent = $('.js-article-content');
+      var hasSidebar = $('.js-page-root').hasClass('layout--page--sidebar');
+      var scroll = hasSidebar ? '.js-page-main' : 'html, body';
+      $scroll = $(scroll);
 
-<p>This allowed a new model to be quickly trained and run on simulated data for defects. The defect simulation and physical significance will be explained in detail in a later post. The initial results are promising on both noisy and clean data.</p>
-
-<p><img src="/assets/images/2485_defect63.jpg" alt="Noisy Defects " title="Noisy Defects" class="center-image" width="400px" />
-<em>Noisy, crowded simulated defect data. The red markers are all the defect detections from YOLO. Although almost no defects are missed, several false detections exist.</em></p>
-
-<p><img src="/assets/images/153248_defect8.jpg" alt="Clear Defects " title="Clear Defects" class="center-image image-xl" width="400px" />.
-<em>Clean simulated defect data. The trained model was able to accurately label all defects with few mistakes.</em></p>
-
-<p>The next step is to asssess the viability of the models trained on simulated data at detecting defects in experimental data.</p>
-
-</div><section class="page__comments d-print-none"></section></article><!-- start custom main bottom snippet -->
+      $articleContent.find('.highlight').each(function() {
+        $this = $(this);
+        $this.attr('data-lang', $this.find('code').attr('data-lang'));
+      });
+      $articleContent.find('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]').each(function() {
+        $this = $(this);
+        $this.append($('<a class="anchor d-print-none" aria-hidden="true"></a>').html('<i class="fas fa-anchor"></i>'));
+      });
+      $articleContent.on('click', '.anchor', function() {
+        $scroll.scrollToAnchor('#' + $(this).parent().attr('id'), 400);
+      });
+    });
+  });
+})();
+</script></div><section class="page__comments d-print-none"></section></article><!-- start custom main bottom snippet -->
 
 <!-- end custom main bottom snippet --></div>
             </div></div></div><div class="page__footer d-print-none">
