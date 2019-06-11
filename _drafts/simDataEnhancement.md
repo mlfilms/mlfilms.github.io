@@ -11,11 +11,24 @@ The brightness and contrast of the experimental images can vary based on factors
 
 $$ px = \frac{px - mean(I)}{6*std(I)}+0.5$$
 
-This standardization ensures a similar dynamic range and brightness regardless of the specific lighting in an experiment. A similar standardization is applied to the simulation data, to give the simulation and experimental data similar dynamic ranges. However, the simulation has the offset (mean) and standard devation slightly randomized in order to help the model learn to identify defects in a wider contrast  range.
+This standardization ensures a similar dynamic range and brightness regardless of the specific lighting in an experiment. A similar standardization is applied to the simulation data, to give the simulation and experimental data similar dynamic ranges. However, the simulation has the offset (mean) and standard deviation slightly randomized in order to help the model learn to identify defects in a wider contrast  range.
+
+![Sample Defect Image ](/assets/images/2019-06-04_s2_5900RAW.tif "Sample Defect Image"){: .center-image}
+*Experimental image before standardization*
+
+![Sample Defect Image ](/assets/images/2019-06-04_s2_5900.tif "Sample Defect Image"){: .center-image}
+*Experimental image after standardization*
+
 
 ## Accounting For Traditional Experimental Noise
 
 Although it is important to make the experimental data as consistent as possible, it is equally important to make the training data as inconsistent as possible. If you train the model only with images containing distinct intensity levels and gradients, the model will learn to rely on those specifc patterns to identify defects. Instead, we wish to make the model as robust as possible by training it on images with a variety of different lighting levels, contrasts, and visual artifacts in order to force the model to recognize the more abstract pattern of a defect. This will result in a model that is able to identify a wider variety of defects in a much larger set of experimental conditions.
+
+![Sample Defect Image ](/assets/images/2019-06-04_s2_5900.tif "Sample Defect Image"){: .center-image}
+*Typical experimental image after standardization*
+
+![Sample Defect Image ](/assets/images/161311_defect12.jpg "Sample Defect Image"){: .center-image}
+*Typical simulated image after standardization*
 
 To this end, we add several abberations to the simulated data.
 
@@ -37,10 +50,26 @@ In Fourier Analysis, information is transformed from the spatial or time domain 
 
 $$ F[k,l]=\frac{1}{MN}\sum_{m=0}^{M-1}\sum_{n=0}{N-1}f[m,n]e^{-2j\pi(\frac{k}{M}m+\frac{l}{N}n)}
 
-For our experiment, we make use of the *ffrpack* module of python's *scipy* package. Images are converted into their frequency space. The image converted into a frequency space can be displayed as an image of the same size as the original image (figure).
+For our experiment, we make use of the *ffrpack* module of python's *scipy* package. Images are converted into their frequency space. The image converted into a frequency space can be displayed as an image of the same size as the original image.
+
+![Sample Defect Image ](/assets/images/fourierCrop.png "Sample Defect Image"){: .center-image}
 
 The frequency space image shows several clearly defined vertical and horizontal lines representing the periodic noise we observe in our images. We can test this by setting the magnitude of these frequencies to zero, and performing the inverse Fourier analysis returning the original image, but without the removed frequencies (figure).
 
-Observing the resulting image, it is clear that the periodic noise of the image is dramatically reduced while maintaining the portions of information we're actually interested in. Instead of deleting these frequencies from the image, we can instead extract them from the image, and perform the inverse transform on these frequencies alone. The resulting image (figure) shows the noise texture we recognise from the experimental data.
+Observing the resulting image, it is clear that the periodic noise of the image is dramatically reduced while maintaining the portions of information we're actually interested in. Instead of deleting these frequencies from the image, we can instead extract them from the image, and perform the inverse transform on these frequencies alone. The resulting image 
+![Sample Defect Image ](/assets/images/noise1.jpg "Sample Defect Image"){: .center-image}
+shows the noise texture we extracted from the experimental data.
 
 A noise template is made by saving the output noise image, creating an image of the noise pattern which can be weighted into the simulation images. The result is a simulation image with the same noise as we observe in our experimental data, allowing the algorithm to learn to identify defects with the same noise as our data.
+
+## Results
+
+Here are a few samples of the resulting simulation images:
+![Sample Defect Image ](/assets/images/fourSim.png "Sample Defect Image"){: .center-image}
+
+As you can see, there is a great variety of constrast, sharpness, brightness, noise, and brightness shifts. 
+
+After training on a set of 1000 noisy simulation images, the model was successfully identify the major of defects in a real experimental image.
+
+![Sample Defect Image ](/assets/images/2019-06-04_s2_5900Marked.tif "Sample Defect Image"){: .center-image}
+
