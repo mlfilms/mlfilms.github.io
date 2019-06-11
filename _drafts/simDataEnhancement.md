@@ -22,6 +22,13 @@ Although we attempt to standardize our experimental images based on the mean and
 
 When performing photomicroscopy, you often get the boundaries of the microscope apperature in the images, which appear as a sharp transition to dark. Furthermore, older cameras will have distinct brightness shifts partway through the image. These can be caused due to manufacturing inaccuracies or sensor degradation over time. Early version of the machine learning model would place detections along these boundaries, as it associated  areas of quick shifts from light to dark as defects. To help the model learn to ignore such boundaries, similar shifts were added to the simulation images. Each simulation image was broken into four randomized quadrants, with each quadrant having its brighness randomly increased or decreased. After training on this new simulated data, the model successfully learned not to recognize random boundaries as defects.
 
+## Smart Noise
+Many cameras also have low levels of period noise. Description of smart noise.
+
+
+
+These extracted patterns were then applied to the simulated images. The strength and skew of the applied pattern was chosen randomly for each image in order for the trained model to be as versatile as possible.
+
 
 
 
