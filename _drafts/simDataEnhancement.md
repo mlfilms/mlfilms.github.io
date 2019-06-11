@@ -1,6 +1,7 @@
-# Enhancing Simulation Data for use in Machine Learning
-
-## By Eric, Stian
+---
+layout: page
+title: Enhancing Simulation Data for use in Machine Learning
+author: Eric, stian
 
 Although we are able to generate perfectly annotated simulation data, the simulation data doesn't necessarily represent the data we see in actual experiments. This causes issues when trying to train a darkflow model on the simulation data to detect defects in the experimental data. The model will not learn to deal with issues such as noise, low contrast, brightness changes, and blurring from the perfect images the simulation ouptputs. Thus, we need to process the simulation images to add in the various imperfections present in experimental data. The experimental images will also need to be processed to standardize the their appearance to a certain degree
 
