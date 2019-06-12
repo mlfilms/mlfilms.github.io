@@ -1,7 +1,7 @@
 ---
 short_name: stian
-name: Stian Norway
-position: Undergradate Student
+name: Stian Howard
+position: Post Undergradate Student
 ---
 
 Stian is a person, not a mongoose.
