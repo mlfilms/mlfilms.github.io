@@ -173,42 +173,44 @@ X, Y = np.indices(testGrid.shape)
 U = xPos(f1)
 V = yPos(f1)
 gg = hamxy(f1)
-wl,dL = dCount(f1)
-pD = np.where(dL[1:, 1:].ravel() == 1)[0]
-mD = np.where(dL[1:,1:].ravel() == -1)[0]
+wl, dL = dCount(f1)
+pD = np.where(dL.ravel() == 1)[0]
+mD = np.where(dL.ravel() == -1)[0]
 ax3.quiver(X, Y, U, V)
 
-# because we are dealing with a matrix matplotlib will switch the y and x axis.
 
-#pos =[X.ravel(),Y.ravel()]
-#[c.set_facecolor('blue') for c in dCirc[mD]]
-#[c.set_facecolor('red') for c in dCirc[pD]]
-#[c.set_text('+') for c in dText[pD]]
-#[c.set_text('-') for c in dText[mD]]
-#ax.set_title('grid with defects')
-circ = []
+circ = {}
 for i,j in zip(X.ravel(),Y.ravel()):
     print(i,j)
-    circ.append(plt.Circle((i,j),.1,zorder=2))
-    ax3.add_artist(circ[-1])
+    circ[(i,j)]=(plt.Circle((i,j),.1,zorder=2))
+    ax3.add_artist(circ[(i,j)])
 
-dCirc = []
-dText = []
+dCirc = {}
+dText = {}
 for i, j in zip(X[1:, :].ravel(), Y[:, 1:].ravel()):
     print(i, j)
-    dCirc.append(plt.Rectangle(
+    dCirc[(i,j)]=(plt.Rectangle(
         (i-1, j-1), 1, 1, alpha=.1, edgecolor='k', facecolor='white', zorder=0) )
-    ax3.add_artist(dCirc[-1])
-    dText.append(plt.Text(x=i-.5, y=j-.5, text='',fontsize=12, va='center', ha='center', zorder=1))
-    ax3.add_artist(dText[-1])
-dCirc = np.array(dCirc)
-dText = np.array(dText)
+    ax3.add_artist(dCirc[(i,j)])
+    dText[(i,j)]=(plt.Text(x=i-.5, y=j-.5, text='',fontsize=12, va='center', ha='center', zorder=1))
+    ax3.add_artist(dText[(i,j)])
+#dCirc = np.array(dCirc)
+#dText = np.array(dText)
 
 pos = [X.ravel(), Y.ravel()]
-[c.set_facecolor('blue') for c in dCirc[mD]]
-[c.set_facecolor('red') for c in dCirc[pD]]
-[c.set_text('+') for c in dText[pD]]
-[c.set_text('-') for c in dText[mD]]
+xpDefect = X.ravel()[pD]
+ypDefect = Y.ravel()[pD]
+xmDefect = X.ravel()[mD]
+ymDefect = Y.ravel()[mD]
+
+pDefect = np.vstack([xpDefect,ypDefect]).T
+mDefect = np.vstack([xmDefect,ymDefect]).T
+[dCirc[tuple(loc)].set_facecolor('blue') for loc in mDefect]
+[dCirc[tuple(loc)].set_facecolor('red') for loc in pDefect]
+
+
+[dText[tuple(loc)].set_text('+') for loc in pDefect]
+[dText[tuple(loc)].set_text('-') for loc in mDefect]
 ax.set_title('grid with defects')
 #ax3.set_xlim([-1, 11])
 #ax3.set_ylim([-1, 11])
@@ -238,14 +240,6 @@ pD = np.where(dL.ravel() == 1)[0]
 mD = np.where(dL.ravel() == -1)[0]
 ax4.quiver(X,Y, U, V)
 
-# because we are dealing with a matrix matplotlib will switch the y and x axis.
-
-#pos =[X.ravel(),Y.ravel()]
-#[c.set_facecolor('blue') for c in dCirc[mD]]
-#[c.set_facecolor('red') for c in dCirc[pD]]
-#[c.set_text('+') for c in dText[pD]]
-#[c.set_text('-') for c in dText[mD]]
-#ax.set_title('grid with defects')
 circ = {}
 for i,j in zip(X.ravel(),Y.ravel()):
     print(i,j)
