@@ -24,18 +24,19 @@ def dCount(grid):
     imShape = grid.shape
     N = imShape[0]
     dgrid = np.zeros(imShape)
+    wgrid = np.zeros(imShape)
     for i,row in enumerate(grid):
         for j,col in enumerate(row):
-            wN = wNum(grid[i, (j-i)%N],col) +\
-                 wNum(grid[ (i+1)%N, (j-i)%N], grid[i,(j-1)%N])+\
-                 wNum(grid[ (i+1)%N, (j)%N],grid[ (i+1)%N, (j-i)%N])+\
-                 wNum(col,grid[(i+1)%N, (j)%N])
-            #dgrid[i,j] = wN
+            wN = wNum(grid[i, (j-1)%N],col) +\
+                 wNum(grid[ (i-1)%N, (j-1)%N], grid[i,(j-1)%N])+\
+                 wNum(grid[ (i-1)%N, (j)%N],grid[ (i-1)%N, (j-1)%N])+\
+                 wNum(col,grid[(i-1)%N, (j)%N])
+            wgrid[i,j] = wN
             if (wN >= np.pi):
                 dgrid[i,j] = 1
             elif (-wN >= np.pi):
                 dgrid[i,j] = -1
-    return dgrid
+    return (wgrid, dgrid)
 
 #parser = argparse.ArgumentParser(description='Make some movies')
 #parser.add_argument('fName',type=str,help='directory name for data')
@@ -94,7 +95,7 @@ f1 = simpleGrid
 U = xPos(f1)
 V = yPos(f1)
 gg = hamxy(f1)
-dL = dCount(f1)
+wl, dL = dCount(f1)
 pD = np.where(dL[1:,1:]==1)[0]
 mD = np.where(dL[1:,1:]==-1)[0]
 #[c.set_facecolor('blue') for c in dCirc[mD]]
@@ -108,7 +109,7 @@ f1 = grid
 U = xPos(f1)
 V = yPos(f1)
 gg = hamxy(f1)
-dL = dCount(f1)
+wl,dL = dCount(f1)
 pD = np.where(dL==1)[0]
 mD = np.where(dL==-1)[0]
 #[c.set_facecolor('blue') for c in dCirc[mD]]
@@ -140,7 +141,7 @@ f1 = grid
 U = xPos(f1)
 V = yPos(f1)
 gg = hamxy(f1)
-dL = dCount(f1)
+wl,dL = dCount(f1)
 pD = np.where(dL[1:,1:].ravel()==1)[0]
 mD = np.where(dL[1:,1:].ravel()==-1)[0]
 Q.set_UVC(U,V,gg)
@@ -155,18 +156,29 @@ ax.set_title('grid with defects')
 fig.savefig('labeled-defects.png')
 
 plt.close('all')
-fig3,ax3 = plt.subplots()
+
+
+def vortex(px, py, mx, my, grid):
+    x, y = np.indices(grid.shape)
+    return np.mod(grid+np.arctan2((x-px), (y-py))-np.arctan2((x-mx), (y-my)), 2*np.pi)-np.pi
+
+
+fig3, ax3 = plt.subplots()
 ax3.set_aspect(aspect='equal')
-testGrid = np.zeros([10,10])
-testGrid[1,1] = np.pi
+ax3.axis('off')
+testGrid = np.zeros([20, 20])
+testGrid = vortex(5-.5, 5-.5, 12-.5, 12-.5,testGrid)
 f1 = testGrid
+X, Y = np.indices(testGrid.shape)
 U = xPos(f1)
 V = yPos(f1)
 gg = hamxy(f1)
-dL = dCount(f1)
-pD = np.where(dL[1:,1:].ravel()==1)[0]
-mD = np.where(dL[1:,1:].ravel()==-1)[0]
-ax3.quiver(X,Y,U,V)
+wl,dL = dCount(f1)
+pD = np.where(dL[1:, 1:].ravel() == 1)[0]
+mD = np.where(dL[1:,1:].ravel() == -1)[0]
+ax3.quiver(X, Y, U, V)
+
+# because we are dealing with a matrix matplotlib will switch the y and x axis.
 
 #pos =[X.ravel(),Y.ravel()]
 #[c.set_facecolor('blue') for c in dCirc[mD]]
@@ -182,17 +194,94 @@ for i,j in zip(X.ravel(),Y.ravel()):
 
 dCirc = []
 dText = []
-for i,j in zip(X[1:,:].ravel(),Y[:,1:].ravel()):
-        print(i,j)
-        dCirc.append(plt.Rectangle((i-1,j-1),1,1,alpha=.1,edgecolor='k',facecolor='white',zorder=0))
-        ax3.add_artist(dCirc[-1])
-        dText.append(plt.Text(x=i+.5,y=j+.5, text='',fontsize=12,va='center',ha='center',zorder=1))
-        ax3.add_artist(dText[-1])
+for i, j in zip(X[1:, :].ravel(), Y[:, 1:].ravel()):
+    print(i, j)
+    dCirc.append(plt.Rectangle(
+        (i-1, j-1), 1, 1, alpha=.1, edgecolor='k', facecolor='white', zorder=0) )
+    ax3.add_artist(dCirc[-1])
+    dText.append(plt.Text(x=i-.5, y=j-.5, text='',fontsize=12, va='center', ha='center', zorder=1))
+    ax3.add_artist(dText[-1])
 dCirc = np.array(dCirc)
 dText = np.array(dText)
-ax3.set_xlim([-1,11])
-ax3.set_ylim([-1,11])
-plt.show()
+
+pos = [X.ravel(), Y.ravel()]
+[c.set_facecolor('blue') for c in dCirc[mD]]
+[c.set_facecolor('red') for c in dCirc[pD]]
+[c.set_text('+') for c in dText[pD]]
+[c.set_text('-') for c in dText[mD]]
+ax.set_title('grid with defects')
+#ax3.set_xlim([-1, 11])
+#ax3.set_ylim([-1, 11])
+#plt.close('all')
+
+#make single vortex at center of grid
+plt.savefig('2defects.png')
 
 
+fig4, ax4 = plt.subplots()
+ax4.set_aspect(aspect='equal')
+testGrid = np.zeros([20, 20])
+pList = []
+mList = []
+np.random.seed(403)
+for ii in np.arange(10):
+    pList.append([np.random.randint(17)+1.5,np.random.randint(17)+1.5])
+    mList.append([np.random.randint(17)+1.5,np.random.randint(17)+1.5])
+    testGrid = vortex(*pList[-1], *mList[-1], testGrid)
+f1 = testGrid
+X, Y = np.indices(testGrid.shape)
+U = xPos(f1)
+V = yPos(f1)
+gg = hamxy(f1)
+wl,dL = dCount(f1)
+pD = np.where(dL.ravel() == 1)[0]
+mD = np.where(dL.ravel() == -1)[0]
+ax4.quiver(X,Y, U, V)
 
+# because we are dealing with a matrix matplotlib will switch the y and x axis.
+
+#pos =[X.ravel(),Y.ravel()]
+#[c.set_facecolor('blue') for c in dCirc[mD]]
+#[c.set_facecolor('red') for c in dCirc[pD]]
+#[c.set_text('+') for c in dText[pD]]
+#[c.set_text('-') for c in dText[mD]]
+#ax.set_title('grid with defects')
+circ = {}
+for i,j in zip(X.ravel(),Y.ravel()):
+    print(i,j)
+    circ[(i,j)]=(plt.Circle((i,j),.1,zorder=2))
+    ax4.add_artist(circ[(i,j)])
+
+dCirc = {}
+dText = {}
+for i, j in zip(X[1:, :].ravel(), Y[:, 1:].ravel()):
+    print(i, j)
+    dCirc[(i,j)]=(plt.Rectangle(
+        (i-1, j-1), 1, 1, alpha=.1, edgecolor='k', facecolor='white', zorder=0) )
+    ax4.add_artist(dCirc[(i,j)])
+    dText[(i,j)]=(plt.Text(x=i-.5, y=j-.5, text='',fontsize=12, va='center', ha='center', zorder=1))
+    ax4.add_artist(dText[(i,j)])
+#dCirc = np.array(dCirc)
+#dText = np.array(dText)
+
+pos = [X.ravel(), Y.ravel()]
+xpDefect = X.ravel()[pD]
+ypDefect = Y.ravel()[pD]
+xmDefect = X.ravel()[mD]
+ymDefect = Y.ravel()[mD]
+
+pDefect = np.vstack([xpDefect,ypDefect]).T
+mDefect = np.vstack([xmDefect,ymDefect]).T
+[dCirc[tuple(loc)].set_facecolor('blue') for loc in pDefect]
+[dCirc[tuple(loc)].set_facecolor('red') for loc in mDefect]
+#[c.set_facecolor('red') for c in dCirc[pD]]
+for i in np.arange(10):
+    ax4.add_artist(plt.Text(x=pList[i][0],y=pList[i][1], text="+", va='center',ha='center'))
+    ax4.add_artist(plt.Text(x=mList[i][0],y=mList[i][1], text="-", va='center',ha='center'))
+#[c.set_text('+') for c in dText[pD]]
+#[c.set_text('-') for c in dText[mD]]
+ax4.set_title('grid with defects')
+#ax3.set_xlim([-1, 11])
+#ax3.set_ylim([-1, 11])
+#plt.close('all')
+plt.savefig('test40.png')
