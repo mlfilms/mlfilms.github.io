@@ -1,4 +1,5 @@
 {%- assign _author = site.authors| where: 'short_name',  include.article.author |first %}
+{% assign _authors = include.article.author | split: ", " %}
 
 {%- if include.html != false -%}
 
@@ -57,7 +58,10 @@
       {%- if _show_author or _show_date or _pageview -%}
         <ul class="right-col menu">
           {%- if _show_author  -%}
-            <li><i class="fas fa-user"></i> <span>{{ _author.name }}</span></li>
+            {% for currentAuthor in _authors %}
+                {%- assign author = site.authors| where: 'short_name', currentAuthor |first %}
+                <li><i class="fas fa-user"></i> <span>{{ author.name }}</span> </li>
+            {% endfor %}
           {%- endif -%}
 
           {%- if _show_date -%}
