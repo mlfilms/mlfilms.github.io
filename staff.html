@@ -12,7 +12,33 @@ title: About
 <li>
     <h2> {{ author.name }}<font size="3"> ||  {{author.position}} </font> </h2>
 <p>  {{ author.content | markdownify }} </p>
+
+<div class="author-links">
+  <ul class="menu menu--nowrap menu--inline">
+    {%- if author.linkedin -%}
+      <li title="{{ _locale_string_follow | replace: '[NAME]', 'Linkedin' }}">
+        <a class="button button--circle linkedin-button" itemprop="sameAs" href="https://www.linkedin.com/in/{{ author.linkedin }}" target="_blank">
+          <div class="icon">{%- include svg/icon/social/linkedin.svg -%}</div>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if author.github -%}
+      <li title="{{ _locale_string_follow | replace: '[NAME]', 'Github' }}">
+        <a class="button button--circle github-button" itemprop="sameAs" href="https://github.com/{{ author.github }}" target="_blank">
+          <div class="icon">{%- include svg/icon/social/github.svg -%}</div>
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- if author.url -%}
+      <link itemprop="url" href="{{ author.url }}">
+    {%- endif -%}
+  </ul>
+</div>
+
 </li>
 {% endfor %}
 
 </u>
+
