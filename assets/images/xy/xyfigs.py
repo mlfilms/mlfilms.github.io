@@ -212,6 +212,7 @@ mDefect = np.vstack([xmDefect,ymDefect]).T
 [dText[tuple(loc)].set_text('+') for loc in pDefect]
 [dText[tuple(loc)].set_text('-') for loc in mDefect]
 ax.set_title('grid with defects')
+ax3.axis('off')
 #ax3.set_xlim([-1, 11])
 #ax3.set_ylim([-1, 11])
 #plt.close('all')
