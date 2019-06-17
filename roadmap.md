@@ -9,7 +9,7 @@ aside:
 
 **Statement 1\|** The machine learning renaissance has given machines the ability to analyze complicated data sets (such as images) to extract useful information (see facial recognition). Success of these methods depends on having large sets of training data, a selection of the overall dataset to train an algorithm.
 
-**Statement 2\|** Experimental results from table-top physical experiments are rarely large or robust enough to form self-consistant training sets, so experimental analysis in physics remains a 'bespoke' process, requiring a craftsperson (graduate student) to analyze each set of data by hand.
+**Statement 2\|** Experimental results from table-top physical experiments are rarely large or robust enough to form self-consistent training sets, so experimental analysis in physics remains a 'bespoke' process, requiring a craftsperson (graduate student) to analyze each set of data by hand.
 
 **Statement 3\|** Physical systems can often be simulated to high-accuracy using modern computing resources.
 
@@ -28,14 +28,14 @@ Two-dimensional topological films...
 - - [ ] ***In Progress*** generate simulated training sets 
 - - [x] ***Completed*** choose machine learning paradigm 
 - - [x] ***Completed*** setup basic ML framework to work with simulation and experimental data
-- - [ ] ***In Progress*** collect data from experimenal system 
+- - [ ] ***In Progress*** collect data from experimental system 
 - [ ] provide basic documentation for developed tools and concepts (README.md, website)
 - [ ] ***In Progress*** dockerize codebase for reproducibility and simplification
 
 **Stage 1: Refinement**
 - [ ] alter simulation images to imitate experimental data  images (camera noise, blurring)
 - [ ] experiment with algorithm parameters to optimize the model
-- [ ] implement filtering to sanitize inconsisten detections
+- [ ] implement filtering to sanitize inconsistent detections
 
 **Stage 2: Application**
 - [ ] apply pipeline to system of interest to generate novel results
